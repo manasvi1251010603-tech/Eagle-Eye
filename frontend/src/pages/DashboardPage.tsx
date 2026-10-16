@@ -72,7 +72,7 @@ export const DashboardPage: React.FC = () => {
   return (
     <div className="p-6 space-y-6 max-w-7xl mx-auto">
       {/* Top Banner & Quick Actions */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-5 rounded-xl bg-surface border border-slate-border">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-5 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical">
         <div>
           <h2 className="text-xl font-bold text-white tracking-wide">
             Industrial Inspection Command Center
@@ -85,7 +85,7 @@ export const DashboardPage: React.FC = () => {
         <div className="flex items-center gap-3">
           <button
             onClick={() => navigate('/history')}
-            className="px-3.5 py-2 rounded-md bg-surface-elevated border border-slate-border text-gray-300 hover:text-white text-xs font-medium transition-colors"
+            className="px-3.5 py-2 rounded-md bg-surface-elevated/80 border border-slate-border/80 text-gray-300 hover:text-white text-xs font-medium transition-colors"
           >
             Audit Archive
           </button>
@@ -102,7 +102,7 @@ export const DashboardPage: React.FC = () => {
       {/* KPI Cards */}
       <div className="grid grid-cols-2 md:grid-cols-5 gap-3.5">
         {/* Total Sessions */}
-        <div className="p-4 rounded-lg bg-surface border border-slate-border">
+        <div className="p-4 rounded-lg bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical">
           <div className="text-[11px] font-mono uppercase text-gray-400 mb-1 flex items-center justify-between">
             <span>Sessions</span>
             <FolderOpen className="w-4 h-4 text-gray-400" />
@@ -116,7 +116,7 @@ export const DashboardPage: React.FC = () => {
         </div>
 
         {/* PASS Count */}
-        <div className="p-4 rounded-lg bg-surface border border-emerald-500/20 bg-emerald-950/10">
+        <div className="p-4 rounded-lg bg-surface/85 backdrop-blur-md border border-emerald-500/30 bg-emerald-950/15 shadow-technical">
           <div className="text-[11px] font-mono uppercase text-emerald-400 mb-1 flex items-center justify-between">
             <span>Passed Checks</span>
             <CheckCircle2 className="w-4 h-4 text-emerald-400" />
@@ -130,7 +130,7 @@ export const DashboardPage: React.FC = () => {
         </div>
 
         {/* FAIL Count */}
-        <div className="p-4 rounded-lg bg-surface border border-red-500/20 bg-red-950/10">
+        <div className="p-4 rounded-lg bg-surface/85 backdrop-blur-md border border-red-500/30 bg-red-950/15 shadow-technical">
           <div className="text-[11px] font-mono uppercase text-red-400 mb-1 flex items-center justify-between">
             <span>Open Defects</span>
             <XCircle className="w-4 h-4 text-red-400" />
@@ -144,7 +144,7 @@ export const DashboardPage: React.FC = () => {
         </div>
 
         {/* REVIEW Count */}
-        <div className="p-4 rounded-lg bg-surface border border-amber-500/20 bg-amber-950/10">
+        <div className="p-4 rounded-lg bg-surface/85 backdrop-blur-md border border-amber-500/30 bg-amber-950/15 shadow-technical">
           <div className="text-[11px] font-mono uppercase text-amber-400 mb-1 flex items-center justify-between">
             <span>Review Needed</span>
             <AlertTriangle className="w-4 h-4 text-amber-400" />
@@ -158,7 +158,7 @@ export const DashboardPage: React.FC = () => {
         </div>
 
         {/* First Time Yield */}
-        <div className="p-4 rounded-lg bg-surface border border-slate-border">
+        <div className="p-4 rounded-lg bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical">
           <div className="text-[11px] font-mono uppercase text-gray-400 mb-1 flex items-center justify-between">
             <span>First-Time Yield</span>
             <TrendingUp className="w-4 h-4 text-accent-cyan" />
@@ -177,7 +177,7 @@ export const DashboardPage: React.FC = () => {
       {/* Charts Section */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Defect Distribution Chart */}
-        <div className="md:col-span-2 p-5 rounded-xl bg-surface border border-slate-border flex flex-col justify-between">
+        <div className="md:col-span-2 p-5 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical flex flex-col justify-between">
           <div className="flex items-center justify-between mb-4">
             <div>
               <h3 className="text-sm font-semibold text-white">Defect Frequency by Check Module</h3>
@@ -206,7 +206,7 @@ export const DashboardPage: React.FC = () => {
         </div>
 
         {/* Inspection Outcomes Donut */}
-        <div className="p-5 rounded-xl bg-surface border border-slate-border flex flex-col justify-between">
+        <div className="p-5 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical flex flex-col justify-between">
           <div>
             <h3 className="text-sm font-semibold text-white">Inspection Outcome Ratio</h3>
             <p className="text-xs text-gray-400">Cumulative status proportion</p>
@@ -257,7 +257,7 @@ export const DashboardPage: React.FC = () => {
       </div>
 
       {/* Recent Inspection Sessions Table */}
-      <div className="p-5 rounded-xl bg-surface border border-slate-border space-y-4">
+      <div className="p-5 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical space-y-4">
         <div className="flex items-center justify-between">
           <div>
             <h3 className="text-sm font-semibold text-white">Recent Inspection Workspaces</h3>

@@ -177,7 +177,7 @@ export const ReferenceAlignmentPage: React.FC = () => {
   return (
     <div className="p-6 max-w-7xl mx-auto space-y-6">
       {/* Top Banner & Tab Controls */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-5 rounded-xl bg-surface border border-slate-border">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-5 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical">
         <div>
           <div className="flex items-center gap-2 mb-1">
             <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-accent-blue/10 text-accent-cyan border border-accent-blue/30 font-bold uppercase">
@@ -212,7 +212,7 @@ export const ReferenceAlignmentPage: React.FC = () => {
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-mono font-medium transition-colors ${
             activeTab === 'references'
               ? 'bg-accent-blue text-white shadow-technical'
-              : 'bg-surface text-gray-400 hover:text-white border border-slate-border'
+              : 'bg-surface/80 text-gray-400 hover:text-white border border-slate-border/80 backdrop-blur-sm'
           }`}
         >
           <Table className="w-4 h-4" />
@@ -223,7 +223,7 @@ export const ReferenceAlignmentPage: React.FC = () => {
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-mono font-medium transition-colors ${
             activeTab === 'alignment'
               ? 'bg-accent-blue text-white shadow-technical'
-              : 'bg-surface text-gray-400 hover:text-white border border-slate-border'
+              : 'bg-surface/80 text-gray-400 hover:text-white border border-slate-border/80 backdrop-blur-sm'
           }`}
         >
           <ScanLine className="w-4 h-4" />
@@ -235,7 +235,7 @@ export const ReferenceAlignmentPage: React.FC = () => {
       {activeTab === 'references' && (
         <div className="space-y-6">
           {/* Metadata Card */}
-          <div className="p-4 rounded-xl bg-surface border border-slate-border flex flex-wrap items-center justify-between gap-4">
+          <div className="p-4 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical flex flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-4 text-xs font-mono">
               <div className="flex items-center gap-1.5 text-gray-300">
                 <FileText className="w-4 h-4 text-accent-blue" />
@@ -270,7 +270,7 @@ export const ReferenceAlignmentPage: React.FC = () => {
           )}
 
           {/* Components / BOM Table */}
-          <div className="p-5 rounded-xl bg-surface border border-slate-border space-y-3">
+          <div className="p-5 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical space-y-3">
             <div className="flex items-center justify-between">
               <div>
                 <h3 className="text-sm font-semibold text-white flex items-center gap-2">
@@ -375,7 +375,7 @@ export const ReferenceAlignmentPage: React.FC = () => {
           </div>
 
           {/* Wiring Schedule Table */}
-          <div className="p-5 rounded-xl bg-surface border border-slate-border space-y-3">
+          <div className="p-5 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical space-y-3">
             <div className="flex items-center justify-between">
               <div>
                 <h3 className="text-sm font-semibold text-white flex items-center gap-2">
@@ -495,7 +495,7 @@ export const ReferenceAlignmentPage: React.FC = () => {
           </div>
 
           {/* Clearly Labelled Simplified Reference Layout View */}
-          <div className="p-5 rounded-xl bg-surface border border-slate-border space-y-4">
+          <div className="p-5 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical space-y-4">
             <div className="flex items-center justify-between">
               <div>
                 <h3 className="text-sm font-semibold text-white flex items-center gap-2">
@@ -582,7 +582,7 @@ export const ReferenceAlignmentPage: React.FC = () => {
       {activeTab === 'alignment' && (
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
           {/* Main Visual Viewport (3 Cols) */}
-          <div className="lg:col-span-3 p-4 rounded-xl bg-surface border border-slate-border space-y-3 flex flex-col justify-between">
+          <div className="lg:col-span-3 p-4 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical space-y-3 flex flex-col justify-between">
             {/* Viewport Control Bar */}
             <div className="flex items-center justify-between bg-graphite p-2.5 rounded-lg border border-slate-border text-xs">
               <div className="flex items-center gap-1 bg-surface p-1 rounded border border-slate-border">
@@ -723,7 +723,7 @@ export const ReferenceAlignmentPage: React.FC = () => {
           </div>
 
           {/* Right 1 Col: Fine Adjustment Controls */}
-          <div className="p-5 rounded-xl bg-surface border border-slate-border space-y-5 flex flex-col justify-between">
+          <div className="p-5 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical space-y-5 flex flex-col justify-between">
             <div className="space-y-4">
               <h3 className="text-sm font-semibold text-white flex items-center gap-2 border-b border-slate-border pb-3">
                 <Sliders className="w-4 h-4 text-accent-blue" />

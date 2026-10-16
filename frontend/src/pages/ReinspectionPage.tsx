@@ -64,7 +64,7 @@ export const ReinspectionPage: React.FC = () => {
   return (
     <div className="p-6 max-w-7xl mx-auto space-y-6">
       {/* Top Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-5 rounded-xl bg-surface border border-slate-border">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-5 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical">
         <div>
           <div className="flex items-center gap-2 mb-1">
             <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-950/40 text-emerald-400 border border-emerald-500/30 font-bold uppercase">
@@ -93,7 +93,7 @@ export const ReinspectionPage: React.FC = () => {
       </div>
 
       {/* Before vs After Visual Comparison Slider */}
-      <div className="p-5 rounded-xl bg-surface border border-slate-border space-y-3">
+      <div className="p-5 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical space-y-3">
         <div className="flex items-center justify-between text-xs font-mono">
           <span className="text-gray-300 flex items-center gap-2">
             <Split className="w-4 h-4 text-accent-lime" />
@@ -155,7 +155,7 @@ export const ReinspectionPage: React.FC = () => {
         <div className="space-y-6">
           {/* Diff Metric Cards */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5">
-            <div className="p-4 rounded-lg bg-surface border border-emerald-500/30 bg-emerald-950/20">
+            <div className="p-4 rounded-lg bg-surface/85 backdrop-blur-md border border-emerald-500/30 bg-emerald-950/20 shadow-technical">
               <span className="text-[10px] font-mono uppercase text-emerald-400 block mb-1">
                 Resolved Defects
               </span>
@@ -165,7 +165,7 @@ export const ReinspectionPage: React.FC = () => {
               <span className="text-[10px] text-emerald-400/80">K1 Placed & X1:14 Re-tagged</span>
             </div>
 
-            <div className="p-4 rounded-lg bg-surface border border-slate-border">
+            <div className="p-4 rounded-lg bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical">
               <span className="text-[10px] font-mono uppercase text-gray-400 block mb-1">
                 Persistent Defects
               </span>
@@ -175,7 +175,7 @@ export const ReinspectionPage: React.FC = () => {
               <span className="text-[10px] text-gray-400">0 lingering defects</span>
             </div>
 
-            <div className="p-4 rounded-lg bg-surface border border-slate-border">
+            <div className="p-4 rounded-lg bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical">
               <span className="text-[10px] font-mono uppercase text-gray-400 block mb-1">
                 Newly Detected Defects
               </span>
@@ -185,7 +185,7 @@ export const ReinspectionPage: React.FC = () => {
               <span className="text-[10px] text-gray-400">0 regressions</span>
             </div>
 
-            <div className="p-4 rounded-lg bg-surface border border-slate-border">
+            <div className="p-4 rounded-lg bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical">
               <span className="text-[10px] font-mono uppercase text-gray-400 block mb-1">
                 Closure Gatekeeper
               </span>
@@ -197,7 +197,7 @@ export const ReinspectionPage: React.FC = () => {
           </div>
 
           {/* Resolved Defects Table */}
-          <div className="p-5 rounded-xl bg-surface border border-slate-border space-y-4">
+          <div className="p-5 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical space-y-4">
             <h3 className="text-sm font-semibold text-white flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-emerald-400" />
               Verified Resolved Findings

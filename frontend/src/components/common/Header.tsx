@@ -13,13 +13,13 @@ export const Header: React.FC<HeaderProps> = ({ title, subtitle }) => {
   const { currentSessionId, currentCabinetId, sessionsList, setCurrentSessionId } = useInspectionSession();
 
   return (
-    <header className="h-16 bg-graphite/90 backdrop-blur border-b border-slate-border px-6 flex items-center justify-between shrink-0 sticky top-0 z-20">
+    <header className="h-16 bg-graphite/85 backdrop-blur-md border-b border-slate-border/80 px-6 flex items-center justify-between shrink-0 sticky top-0 z-20">
       {/* Title & Context */}
       <div>
         <h1 className="text-base font-semibold text-white flex items-center gap-2.5">
           {title}
           {currentCabinetId && (
-            <span className="text-xs font-mono font-normal px-2 py-0.5 rounded bg-surface border border-slate-border text-accent-cyan">
+            <span className="text-xs font-mono font-normal px-2 py-0.5 rounded bg-surface/80 border border-slate-border/80 text-accent-cyan">
               {currentCabinetId}
             </span>
           )}
@@ -31,7 +31,7 @@ export const Header: React.FC<HeaderProps> = ({ title, subtitle }) => {
       <div className="flex items-center gap-3">
         {/* Quick Session Switcher Dropdown */}
         {sessionsList.length > 0 && (
-          <div className="relative flex items-center gap-1.5 bg-surface px-2.5 py-1 rounded border border-slate-border text-xs font-mono">
+          <div className="relative flex items-center gap-1.5 bg-surface/80 backdrop-blur-sm px-2.5 py-1 rounded border border-slate-border/80 text-xs font-mono">
             <span className="text-gray-400 text-[11px]">SESSION:</span>
             <select
               value={currentSessionId}

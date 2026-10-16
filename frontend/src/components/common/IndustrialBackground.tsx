@@ -1,53 +1,66 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect } from 'react';
 
 interface IndustrialBackgroundProps {
   currentPath: string;
 }
 
-// 5 verified real industrial control-cabinet & technician assets
-const BACKGROUND_ASSETS = [
-  '/images/industrial_bg_1.png', // Technician with tablet in control cabinet aisle
-  '/images/industrial_bg_2.png', // Technician with walkie-talkie inspecting cabinet
-  '/images/industrial_bg_3.png', // Female engineer inspecting cabinet with handheld lamp
-  '/images/industrial_bg_4.jpg', // Industrial control cabinet with DIN rails & breakers
-  '/images/industrial_bg_5.jpg', // Wired industrial cabinet with switchgear
-];
+// 3 verified original industrial control-cabinet & technician photographs attached by the user
+const BACKGROUND_ASSETS: Record<string, string> = {
+  TABLET: '/images/backgrounds/industrial_tech_tablet.png',
+  WALKIE: '/images/backgrounds/industrial_tech_walkie.png',
+  LAMP: '/images/backgrounds/industrial_engineer_lamp.png',
+};
+
+// Route-to-image stable mapping to ensure consistent visual identity without render flicker
+function getImageForPath(path: string): string {
+  if (path === '/') return BACKGROUND_ASSETS.TABLET;
+  if (path.startsWith('/new-inspection') || path.startsWith('/new')) return BACKGROUND_ASSETS.WALKIE;
+  if (path.startsWith('/reference-alignment') || path.startsWith('/alignment')) return BACKGROUND_ASSETS.LAMP;
+  if (path.startsWith('/processing')) return BACKGROUND_ASSETS.TABLET;
+  if (path.startsWith('/results')) return BACKGROUND_ASSETS.TABLET;
+  if (path.startsWith('/repair')) return BACKGROUND_ASSETS.WALKIE;
+  if (path.startsWith('/reinspection')) return BACKGROUND_ASSETS.LAMP;
+  if (path.startsWith('/history')) return BACKGROUND_ASSETS.TABLET;
+  if (path.startsWith('/reports-analytics') || path.startsWith('/reports') || path.startsWith('/analytics')) return BACKGROUND_ASSETS.LAMP;
+  return BACKGROUND_ASSETS.TABLET;
+}
 
 export const IndustrialBackground: React.FC<IndustrialBackgroundProps> = ({ currentPath }) => {
-  // Stable background per major route to avoid flickering during user interaction
-  const selectedImage = useMemo(() => {
-    if (currentPath === '/') return BACKGROUND_ASSETS[0];
-    if (currentPath.startsWith('/new-inspection') || currentPath.startsWith('/new')) return BACKGROUND_ASSETS[1];
-    if (currentPath.startsWith('/reference-alignment') || currentPath.startsWith('/alignment')) return BACKGROUND_ASSETS[2];
-    if (currentPath.startsWith('/results')) return BACKGROUND_ASSETS[3];
-    if (currentPath.startsWith('/repair')) return BACKGROUND_ASSETS[1];
-    if (currentPath.startsWith('/reinspection')) return BACKGROUND_ASSETS[4];
-    if (currentPath.startsWith('/history')) return BACKGROUND_ASSETS[0];
-    if (currentPath.startsWith('/reports-analytics') || currentPath.startsWith('/reports') || currentPath.startsWith('/analytics')) return BACKGROUND_ASSETS[2];
-    return BACKGROUND_ASSETS[0];
-  }, [currentPath]);
+  const selectedImage = useMemo(() => getImageForPath(currentPath), [currentPath]);
+
+  // Preload all background images on mount for instantaneous, zero-flicker route transitions
+  useEffect(() => {
+    Object.values(BACKGROUND_ASSETS).forEach((src) => {
+      const img = new window.Image();
+      img.src = src;
+    });
+  }, []);
 
   return (
     <div
-      className="fixed inset-0 pointer-events-none z-0 overflow-hidden"
+      className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-[#0A0F18]"
       aria-hidden="true"
     >
-      {/* Blurred Industrial Background Image */}
-      <img
-        src={selectedImage}
-        alt=""
-        className="w-full h-full object-cover filter blur-[12px] scale-110 opacity-20 transition-opacity duration-700 ease-in-out"
-        onError={(e) => {
-          // Graceful fallback to solid background if image is not reachable
-          (e.target as HTMLElement).style.display = 'none';
+      {/* 1. Blurred Industrial Photograph Layer (Edge bleed prevented by -inset-8 + scale(1.08)) */}
+      <div
+        key={selectedImage}
+        className="absolute -inset-8 bg-cover bg-center transition-all duration-700 ease-in-out"
+        style={{
+          backgroundImage: `url(${selectedImage})`,
+          filter: 'blur(11px)',
+          transform: 'scale(1.08)',
         }}
       />
 
-      {/* Dark Navy Atmospheric Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0A0F18]/85 via-[#0A0F18]/90 to-[#0A0F18]/95" />
+      {/* 2. Deep Navy Atmospheric Translucent Overlay (Balanced for photo visibility & UI contrast) */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#080D16]/55 via-[#0A0F18]/65 to-[#0A0F18]/78" />
 
-      {/* Subtle Technical Grid Motif */}
-      <div className="absolute inset-0 bg-tech-grid opacity-50" />
+      {/* 3. Subtle Vignette Depth */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_transparent_35%,_#0A0F18_92%)] opacity-35" />
+
+      {/* 4. Subtle Industrial Blueprint Technical Grid */}
+      <div className="absolute inset-0 bg-tech-grid opacity-20" />
     </div>
   );
 };
+

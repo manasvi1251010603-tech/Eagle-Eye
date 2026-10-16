@@ -80,7 +80,7 @@ export const ProcessingPage: React.FC = () => {
   return (
     <div className="p-6 max-w-5xl mx-auto space-y-6">
       {/* Top Banner */}
-      <div className="p-5 rounded-xl bg-surface border border-slate-border flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="p-5 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2 mb-1">
             <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-accent-blue/10 text-accent-cyan border border-accent-blue/30 font-bold uppercase">
@@ -107,7 +107,7 @@ export const ProcessingPage: React.FC = () => {
               <ArrowRight className="w-4 h-4 text-white" />
             </button>
           ) : (
-            <div className="flex items-center gap-2 text-xs font-mono text-accent-cyan px-3 py-1.5 rounded bg-graphite border border-slate-border">
+            <div className="flex items-center gap-2 text-xs font-mono text-accent-cyan px-3 py-1.5 rounded bg-graphite/80 backdrop-blur-sm border border-slate-border">
               <span className="w-2 h-2 rounded-full bg-accent-blue animate-ping" />
               <span>Analyzing Physical Imagery...</span>
             </div>
@@ -116,7 +116,7 @@ export const ProcessingPage: React.FC = () => {
       </div>
 
       {/* Progress Bar */}
-      <div className="p-5 rounded-xl bg-surface border border-slate-border space-y-3">
+      <div className="p-5 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical space-y-3">
         <div className="flex items-center justify-between text-xs font-mono">
           <span className="text-gray-300">Overall Pipeline Progress</span>
           <span className="text-accent-cyan font-bold">{progressPercent}%</span>
@@ -132,7 +132,7 @@ export const ProcessingPage: React.FC = () => {
       {/* Stages Grid & Console Output */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Stages Checklist */}
-        <div className="p-5 rounded-xl bg-surface border border-slate-border space-y-3">
+        <div className="p-5 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical space-y-3">
           <h3 className="text-xs font-mono uppercase tracking-wider text-gray-400 flex items-center gap-2">
             <Layers className="w-4 h-4 text-accent-blue" />
             Active Verification Pipeline Stages
@@ -179,7 +179,7 @@ export const ProcessingPage: React.FC = () => {
         </div>
 
         {/* Live Terminal Output */}
-        <div className="p-5 rounded-xl bg-graphite border border-slate-border flex flex-col justify-between space-y-3 font-mono">
+        <div className="p-5 rounded-xl bg-graphite/85 backdrop-blur-md border border-slate-border/80 shadow-technical flex flex-col justify-between space-y-3 font-mono">
           <div className="flex items-center justify-between border-b border-slate-border pb-2.5">
             <span className="text-xs text-gray-400 flex items-center gap-2">
               <Terminal className="w-3.5 h-3.5 text-accent-cyan" />

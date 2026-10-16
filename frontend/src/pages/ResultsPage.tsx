@@ -107,7 +107,7 @@ export const ResultsPage: React.FC = () => {
   return (
     <div className="p-6 max-w-7xl mx-auto space-y-6">
       {/* Top Bar with KPI Pills & Actions */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-5 rounded-xl bg-surface border border-slate-border">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-5 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical">
         <div>
           <div className="flex items-center gap-2 mb-1">
             <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-accent-blue/10 text-accent-cyan border border-accent-blue/30 font-bold uppercase">
@@ -127,7 +127,7 @@ export const ResultsPage: React.FC = () => {
         <div className="flex items-center gap-2.5">
           <button
             onClick={() => navigate('/reports-analytics')}
-            className="flex items-center gap-2 px-3.5 py-2 rounded-lg bg-surface-elevated border border-slate-border text-xs font-mono text-gray-300 hover:text-white transition-colors"
+            className="flex items-center gap-2 px-3.5 py-2 rounded-lg bg-surface-elevated/80 border border-slate-border/80 text-xs font-mono text-gray-300 hover:text-white transition-colors"
           >
             <Download className="w-3.5 h-3.5 text-accent-cyan" />
             <span>Generate Report</span>
@@ -153,8 +153,8 @@ export const ResultsPage: React.FC = () => {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         <button
           onClick={() => setStatusFilter(statusFilter === 'PASS' ? 'ALL' : 'PASS')}
-          className={`p-3 rounded-lg border text-left transition-all ${
-            statusFilter === 'PASS' ? 'border-emerald-400 bg-emerald-950/30' : 'bg-surface border-slate-border'
+          className={`p-3 rounded-lg border text-left transition-all backdrop-blur-md shadow-technical ${
+            statusFilter === 'PASS' ? 'border-emerald-400 bg-emerald-950/40' : 'bg-surface/85 border-slate-border/80'
           }`}
         >
           <div className="text-[10px] font-mono uppercase text-emerald-400">PASSED ITEMS</div>
@@ -163,8 +163,8 @@ export const ResultsPage: React.FC = () => {
 
         <button
           onClick={() => setStatusFilter(statusFilter === 'FAIL' ? 'ALL' : 'FAIL')}
-          className={`p-3 rounded-lg border text-left transition-all ${
-            statusFilter === 'FAIL' ? 'border-red-400 bg-red-950/30' : 'bg-surface border-slate-border'
+          className={`p-3 rounded-lg border text-left transition-all backdrop-blur-md shadow-technical ${
+            statusFilter === 'FAIL' ? 'border-red-400 bg-red-950/40' : 'bg-surface/85 border-slate-border/80'
           }`}
         >
           <div className="text-[10px] font-mono uppercase text-red-400">FAILED (OPEN DEFECTS)</div>
@@ -173,8 +173,8 @@ export const ResultsPage: React.FC = () => {
 
         <button
           onClick={() => setStatusFilter(statusFilter === 'REVIEW' ? 'ALL' : 'REVIEW')}
-          className={`p-3 rounded-lg border text-left transition-all ${
-            statusFilter === 'REVIEW' ? 'border-amber-400 bg-amber-950/30' : 'bg-surface border-slate-border'
+          className={`p-3 rounded-lg border text-left transition-all backdrop-blur-md shadow-technical ${
+            statusFilter === 'REVIEW' ? 'border-amber-400 bg-amber-950/40' : 'bg-surface/85 border-slate-border/80'
           }`}
         >
           <div className="text-[10px] font-mono uppercase text-amber-400">REQUIRES REVIEW</div>
@@ -183,8 +183,8 @@ export const ResultsPage: React.FC = () => {
 
         <button
           onClick={() => setStatusFilter(statusFilter === 'NOT_CHECKED' ? 'ALL' : 'NOT_CHECKED')}
-          className={`p-3 rounded-lg border text-left transition-all ${
-            statusFilter === 'NOT_CHECKED' ? 'border-gray-400 bg-gray-900/50' : 'bg-surface border-slate-border'
+          className={`p-3 rounded-lg border text-left transition-all backdrop-blur-md shadow-technical ${
+            statusFilter === 'NOT_CHECKED' ? 'border-gray-400 bg-gray-900/60' : 'bg-surface/85 border-slate-border/80'
           }`}
         >
           <div className="text-[10px] font-mono uppercase text-gray-400">NOT CHECKED</div>
@@ -195,7 +195,7 @@ export const ResultsPage: React.FC = () => {
       {/* Main Two-Column View: Left Canvas + Right Findings Detail Drawer */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left 7 Cols: Interactive Annotated Visual Canvas */}
-        <div className="lg:col-span-7 p-4 rounded-xl bg-surface border border-slate-border space-y-3 flex flex-col justify-between">
+        <div className="lg:col-span-7 p-4 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical space-y-3 flex flex-col justify-between">
           {/* Canvas Toolbar */}
           <div className="flex items-center justify-between text-xs bg-graphite p-2 rounded-lg border border-slate-border">
             <span className="font-mono text-gray-400 flex items-center gap-1.5">
@@ -308,7 +308,7 @@ export const ResultsPage: React.FC = () => {
         </div>
 
         {/* Right 5 Cols: Selected Finding Detail Drawer */}
-        <div className="lg:col-span-5 p-5 rounded-xl bg-surface border border-slate-border space-y-4 flex flex-col justify-between">
+        <div className="lg:col-span-5 p-5 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical space-y-4 flex flex-col justify-between">
           {selectedFinding ? (
             <div className="space-y-4">
               {/* Finding Header */}
@@ -433,7 +433,7 @@ export const ResultsPage: React.FC = () => {
       </div>
 
       {/* Comprehensive Filterable Findings Table */}
-      <div className="p-5 rounded-xl bg-surface border border-slate-border space-y-4">
+      <div className="p-5 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical space-y-4">
         {/* Table Filters & Search */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
           <div className="flex items-center gap-2">

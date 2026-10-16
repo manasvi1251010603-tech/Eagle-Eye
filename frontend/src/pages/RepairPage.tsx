@@ -73,7 +73,7 @@ export const RepairPage: React.FC = () => {
   return (
     <div className="p-6 max-w-6xl mx-auto space-y-6">
       {/* Top Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-5 rounded-xl bg-surface border border-slate-border">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-5 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical">
         <div>
           <div className="flex items-center gap-2 mb-1">
             <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-red-950/40 text-red-400 border border-red-500/30 font-bold uppercase">
@@ -99,7 +99,7 @@ export const RepairPage: React.FC = () => {
       </div>
 
       {/* Safety Notice Callout */}
-      <div className="p-4 rounded-xl bg-surface border border-amber-500/30 flex items-start gap-3">
+      <div className="p-4 rounded-xl bg-surface/85 backdrop-blur-md border border-amber-500/30 shadow-technical flex items-start gap-3">
         <div className="p-2 rounded bg-amber-500/10 text-amber-400 shrink-0">
           <ShieldAlert className="w-5 h-5" />
         </div>
@@ -131,10 +131,10 @@ export const RepairPage: React.FC = () => {
                 <div
                   key={finding.id}
                   onClick={() => setActiveFinding(finding)}
-                  className={`p-3.5 rounded-lg border cursor-pointer transition-all ${
+                  className={`p-3.5 rounded-lg border cursor-pointer transition-all backdrop-blur-md shadow-technical ${
                     isSelected
-                      ? 'bg-surface-elevated border-accent-lime shadow-technical'
-                      : 'bg-surface border-slate-border hover:bg-surface-elevated/70'
+                      ? 'bg-surface-elevated/90 border-accent-lime'
+                      : 'bg-surface/85 border-slate-border/80 hover:bg-surface-elevated/70'
                   }`}
                 >
                   <div className="flex items-center justify-between mb-1.5">
@@ -159,7 +159,7 @@ export const RepairPage: React.FC = () => {
         </div>
 
         {/* Right 8 Cols: Guided Repair Checklist */}
-        <div className="lg:col-span-8 p-5 rounded-xl bg-surface border border-slate-border space-y-5">
+        <div className="lg:col-span-8 p-5 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical space-y-5">
           {activeFinding ? (
             <div className="space-y-5">
               {/* Finding Summary Banner */}

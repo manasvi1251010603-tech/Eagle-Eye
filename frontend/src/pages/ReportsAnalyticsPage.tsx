@@ -98,7 +98,7 @@ export const ReportsAnalyticsPage: React.FC = () => {
   return (
     <div className="p-6 max-w-7xl mx-auto space-y-6">
       {/* Top Banner */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-5 rounded-xl bg-surface border border-slate-border">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-5 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical">
         <div>
           <div className="flex items-center gap-2 mb-1">
             <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-accent-blue/10 text-accent-cyan border border-accent-blue/30 font-bold uppercase">
@@ -119,7 +119,7 @@ export const ReportsAnalyticsPage: React.FC = () => {
           <button
             onClick={handleExportPDF}
             disabled={generatingPdf}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-surface-elevated border border-slate-border text-gray-200 hover:text-white text-xs font-mono font-medium hover:border-accent-blue transition-colors"
+            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-surface-elevated/80 border border-slate-border/80 text-gray-200 hover:text-white text-xs font-mono font-medium hover:border-accent-blue transition-colors"
           >
             <FileText className="w-4 h-4 text-red-400" />
             <span>{generatingPdf ? 'Generating PDF...' : 'Download PDF Certificate'}</span>
@@ -143,7 +143,7 @@ export const ReportsAnalyticsPage: React.FC = () => {
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-mono font-medium transition-colors ${
             activeTab === 'reports'
               ? 'bg-accent-blue text-white shadow-technical'
-              : 'bg-surface text-gray-400 hover:text-white border border-slate-border'
+              : 'bg-surface/80 text-gray-400 hover:text-white border border-slate-border/80 backdrop-blur-sm'
           }`}
         >
           <FileText className="w-4 h-4" />
@@ -154,7 +154,7 @@ export const ReportsAnalyticsPage: React.FC = () => {
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-mono font-medium transition-colors ${
             activeTab === 'analytics'
               ? 'bg-accent-blue text-white shadow-technical'
-              : 'bg-surface text-gray-400 hover:text-white border border-slate-border'
+              : 'bg-surface/80 text-gray-400 hover:text-white border border-slate-border/80 backdrop-blur-sm'
           }`}
         >
           <BarChart3 className="w-4 h-4" />
@@ -167,7 +167,7 @@ export const ReportsAnalyticsPage: React.FC = () => {
         <div className="space-y-6">
           {/* Report Configuration & Summary Card */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-5 rounded-xl bg-surface border border-slate-border space-y-3">
+            <div className="p-5 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical space-y-3">
               <span className="text-[10px] font-mono text-gray-400 uppercase tracking-wider block">Inspection Scope</span>
               <div className="text-sm font-bold text-white font-mono">{currentCabinetId}</div>
               <div className="text-xs text-gray-400 space-y-1">
@@ -177,7 +177,7 @@ export const ReportsAnalyticsPage: React.FC = () => {
               </div>
             </div>
 
-            <div className="p-5 rounded-xl bg-surface border border-slate-border space-y-3">
+            <div className="p-5 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical space-y-3">
               <span className="text-[10px] font-mono text-gray-400 uppercase tracking-wider block">Compliance Sign-Off</span>
               <div className="text-sm font-bold text-white">Lead QC Inspector</div>
               <div className="text-xs text-gray-400 space-y-1">
@@ -187,7 +187,7 @@ export const ReportsAnalyticsPage: React.FC = () => {
               </div>
             </div>
 
-            <div className="p-5 rounded-xl bg-surface border border-slate-border space-y-3">
+            <div className="p-5 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical space-y-3">
               <span className="text-[10px] font-mono text-gray-400 uppercase tracking-wider block">Generated Documents</span>
               <div className="text-sm font-bold text-white">Report Repository</div>
               <div className="text-xs text-gray-400 space-y-1">
@@ -201,7 +201,7 @@ export const ReportsAnalyticsPage: React.FC = () => {
           {/* Report Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* PDF Report Card */}
-            <div className="p-5 rounded-xl bg-surface border border-slate-border flex flex-col justify-between space-y-4">
+            <div className="p-5 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical flex flex-col justify-between space-y-4">
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-red-950/40 text-red-400 border border-red-500/30 font-bold uppercase">
@@ -232,7 +232,7 @@ export const ReportsAnalyticsPage: React.FC = () => {
             </div>
 
             {/* Excel Report Card */}
-            <div className="p-5 rounded-xl bg-surface border border-slate-border flex flex-col justify-between space-y-4">
+            <div className="p-5 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical flex flex-col justify-between space-y-4">
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-950/40 text-emerald-400 border border-emerald-500/30 font-bold uppercase">
@@ -264,7 +264,7 @@ export const ReportsAnalyticsPage: React.FC = () => {
           </div>
 
           {/* Generated Reports History Table */}
-          <div className="p-5 rounded-xl bg-surface border border-slate-border space-y-3">
+          <div className="p-5 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical space-y-3">
             <h3 className="text-xs font-mono uppercase tracking-wider text-gray-400 flex items-center gap-2">
               <Clock className="w-4 h-4 text-accent-cyan" />
               Recent Inspection Certificates & Artifacts
@@ -327,7 +327,7 @@ export const ReportsAnalyticsPage: React.FC = () => {
         <div className="space-y-6">
           {/* KPI Summary Cards */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="p-4 rounded-xl bg-surface border border-slate-border space-y-1">
+            <div className="p-4 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical space-y-1">
               <span className="text-[10px] font-mono text-gray-400 uppercase">Total Inspected Cabinets</span>
               <div className="text-2xl font-bold font-mono text-white">
                 {analytics?.total_inspections ?? 11}
@@ -335,7 +335,7 @@ export const ReportsAnalyticsPage: React.FC = () => {
               <span className="text-[11px] text-gray-400 font-mono">SQLite Session Store</span>
             </div>
 
-            <div className="p-4 rounded-xl bg-surface border border-slate-border space-y-1">
+            <div className="p-4 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical space-y-1">
               <span className="text-[10px] font-mono text-gray-400 uppercase">First-Time Pass Rate</span>
               <div className="text-2xl font-bold font-mono text-emerald-400">
                 {analytics?.first_time_pass_rate ?? 72.7}%
@@ -345,7 +345,7 @@ export const ReportsAnalyticsPage: React.FC = () => {
               </span>
             </div>
 
-            <div className="p-4 rounded-xl bg-surface border border-slate-border space-y-1">
+            <div className="p-4 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical space-y-1">
               <span className="text-[10px] font-mono text-gray-400 uppercase">Open Defects</span>
               <div className="text-2xl font-bold font-mono text-red-400">
                 {analytics?.open_defects_count ?? 2}
@@ -353,7 +353,7 @@ export const ReportsAnalyticsPage: React.FC = () => {
               <span className="text-[11px] text-gray-400 font-mono">Pending Rework</span>
             </div>
 
-            <div className="p-4 rounded-xl bg-surface border border-slate-border space-y-1">
+            <div className="p-4 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical space-y-1">
               <span className="text-[10px] font-mono text-gray-400 uppercase">Rework Success Rate</span>
               <div className="text-2xl font-bold font-mono text-accent-cyan">
                 {analytics?.rework_success_rate ?? 92.5}%
@@ -365,7 +365,7 @@ export const ReportsAnalyticsPage: React.FC = () => {
           {/* Charts Row */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Defect Severity Chart */}
-            <div className="p-5 rounded-xl bg-surface border border-slate-border space-y-4">
+            <div className="p-5 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical space-y-4">
               <div className="flex items-center justify-between">
                 <div>
                   <h3 className="text-sm font-semibold text-white flex items-center gap-2">
@@ -419,7 +419,7 @@ export const ReportsAnalyticsPage: React.FC = () => {
             </div>
 
             {/* Defect Categories Chart */}
-            <div className="p-5 rounded-xl bg-surface border border-slate-border space-y-4">
+            <div className="p-5 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical space-y-4">
               <div className="flex items-center justify-between">
                 <div>
                   <h3 className="text-sm font-semibold text-white flex items-center gap-2">

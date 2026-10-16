@@ -219,7 +219,7 @@ export const NewInspectionPage: React.FC = () => {
       />
 
       {/* Top Banner & Quick Actions */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-5 rounded-xl bg-surface border border-slate-border">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-5 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical">
         <div>
           <h2 className="text-xl font-bold text-white tracking-wide">
             New Inspection Workspace
@@ -232,7 +232,7 @@ export const NewInspectionPage: React.FC = () => {
         <div className="flex items-center gap-2.5">
           <button
             onClick={resetToCleanState}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-surface-elevated border border-slate-border text-gray-300 text-xs font-mono hover:text-white hover:bg-surface-highlight transition-colors"
+            className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-surface-elevated/80 border border-slate-border/80 text-gray-300 text-xs font-mono hover:text-white hover:bg-surface-highlight transition-colors"
             title="Clear all fields"
           >
             <RotateCcw className="w-3.5 h-3.5 text-gray-400" />
@@ -242,7 +242,7 @@ export const NewInspectionPage: React.FC = () => {
           <button
             onClick={handleLoadDemoPack}
             disabled={loadingDemo}
-            className="flex items-center gap-2 px-3.5 py-2 rounded-lg bg-surface-elevated border border-accent-blue/40 text-accent-cyan text-xs font-mono font-medium hover:bg-accent-blue/20 transition-colors shadow-sm"
+            className="flex items-center gap-2 px-3.5 py-2 rounded-lg bg-surface-elevated/80 border border-accent-blue/40 text-accent-cyan text-xs font-mono font-medium hover:bg-accent-blue/20 transition-colors shadow-sm"
           >
             <Sparkles className="w-3.5 h-3.5 text-accent-cyan" />
             <span>{loadingDemo ? 'Loading Demo...' : 'Load Industrial Demo Pack'}</span>
@@ -251,7 +251,7 @@ export const NewInspectionPage: React.FC = () => {
       </div>
 
       {/* Metadata Configuration Grid */}
-      <div className="p-5 rounded-xl bg-surface border border-slate-border space-y-4">
+      <div className="p-5 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical space-y-4">
         <h3 className="text-xs font-mono uppercase tracking-wider text-gray-400 flex items-center justify-between">
           <span>Inspection Metadata & Traceability</span>
           <span className="text-[10px] text-gray-500 font-normal">* Required fields</span>
@@ -315,7 +315,7 @@ export const NewInspectionPage: React.FC = () => {
       {/* 3 Upload Sections */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Section A: Cabinet Photograph */}
-        <div className="p-5 rounded-xl bg-surface border border-slate-border flex flex-col justify-between space-y-4">
+        <div className="p-5 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical flex flex-col justify-between space-y-4">
           <div>
             <div className="flex items-center justify-between mb-2">
               <span className="text-xs font-mono font-bold text-accent-cyan">SECTION A</span>
@@ -392,7 +392,7 @@ export const NewInspectionPage: React.FC = () => {
         </div>
 
         {/* Section B: GA Drawing */}
-        <div className="p-5 rounded-xl bg-surface border border-slate-border flex flex-col justify-between space-y-4">
+        <div className="p-5 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical flex flex-col justify-between space-y-4">
           <div>
             <div className="flex items-center justify-between mb-2">
               <span className="text-xs font-mono font-bold text-accent-cyan">SECTION B</span>
@@ -471,7 +471,7 @@ export const NewInspectionPage: React.FC = () => {
         </div>
 
         {/* Section C: Excel Wiring Schedule */}
-        <div className="p-5 rounded-xl bg-surface border border-slate-border flex flex-col justify-between space-y-4">
+        <div className="p-5 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical flex flex-col justify-between space-y-4">
           <div>
             <div className="flex items-center justify-between mb-2">
               <span className="text-xs font-mono font-bold text-accent-cyan">SECTION C</span>
@@ -551,7 +551,7 @@ export const NewInspectionPage: React.FC = () => {
       </div>
 
       {/* Validation Status & Proceed Action */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-5 rounded-xl bg-surface border border-slate-border">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-5 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical">
         <div className="flex items-center gap-3 text-xs">
           {isFormValid ? (
             <div className="flex items-center gap-2 text-emerald-400">

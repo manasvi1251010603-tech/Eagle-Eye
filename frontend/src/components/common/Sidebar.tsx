@@ -30,15 +30,15 @@ export const Sidebar: React.FC = () => {
   ];
 
   return (
-    <aside className="w-64 bg-graphite border-r border-slate-border flex flex-col justify-between shrink-0 h-screen sticky top-0 select-none z-20">
+    <aside className="w-64 bg-graphite/85 backdrop-blur-md border-r border-slate-border/80 flex flex-col justify-between shrink-0 h-screen sticky top-0 select-none z-20">
       {/* Top Brand Header */}
       <div>
-        <div className="p-5 border-b border-slate-border">
+        <div className="p-5 border-b border-slate-border/80">
           <Wordmark size="md" />
         </div>
 
         {/* Active Inspection Session Callout */}
-        <div className="mx-3.5 my-3 p-2.5 rounded-lg bg-surface border border-slate-border">
+        <div className="mx-3.5 my-3 p-2.5 rounded-lg bg-surface/80 border border-slate-border/80 backdrop-blur-sm">
           <div className="flex items-center justify-between text-[11px] font-mono text-gray-400 mb-1">
             <span className="flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-accent-blue animate-pulse" />

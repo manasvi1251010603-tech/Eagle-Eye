@@ -80,7 +80,7 @@ const AppLayout: React.FC = () => {
   const headerInfo = getPageHeader();
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-charcoal text-gray-100 font-sans relative">
+    <div className="flex h-screen w-screen overflow-hidden text-gray-100 font-sans relative">
       {/* Blurred Industrial Atmosphere Background */}
       <IndustrialBackground currentPath={location.pathname} />
 

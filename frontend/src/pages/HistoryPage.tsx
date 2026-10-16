@@ -62,7 +62,7 @@ export const HistoryPage: React.FC = () => {
   return (
     <div className="p-6 max-w-7xl mx-auto space-y-6">
       {/* Top Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-5 rounded-xl bg-surface border border-slate-border">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-5 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical">
         <div>
           <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-accent-blue/10 text-accent-cyan border border-accent-blue/30 font-bold uppercase">
             Quality Records & Compliance
@@ -104,7 +104,7 @@ export const HistoryPage: React.FC = () => {
       {/* Main Grid: Sessions List + Selected Session Audit Trail */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left 7 Cols: History Sessions Table */}
-        <div className="lg:col-span-7 p-5 rounded-xl bg-surface border border-slate-border space-y-4">
+        <div className="lg:col-span-7 p-5 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical space-y-4">
           <div className="flex items-center justify-between">
             <h3 className="text-sm font-semibold text-white">Archived Inspection Sessions</h3>
             <span className="text-xs font-mono text-gray-400">{sessions.length} sessions recorded</span>
@@ -160,7 +160,7 @@ export const HistoryPage: React.FC = () => {
         </div>
 
         {/* Right 5 Cols: Selected Session Audit Trail */}
-        <div className="lg:col-span-5 p-5 rounded-xl bg-surface border border-slate-border space-y-4">
+        <div className="lg:col-span-5 p-5 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical space-y-4">
           <div className="flex items-center justify-between border-b border-slate-border pb-3">
             <div>
               <span className="text-[10px] font-mono text-gray-400 uppercase">Audit Timeline</span>
