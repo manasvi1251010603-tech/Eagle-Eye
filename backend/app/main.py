@@ -1,6 +1,8 @@
 import os
 from contextlib import asynccontextmanager
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
@@ -33,6 +35,21 @@ app = FastAPI(
     version="1.0.0",
     lifespan=lifespan
 )
+
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    clean_errors = []
+    for err in exc.errors():
+        err_copy = dict(err)
+        # Avoid UnicodeDecodeError if input is raw binary
+        if isinstance(err_copy.get("input"), bytes):
+            err_copy["input"] = f"<{len(err_copy['input'])} bytes binary data>"
+        clean_errors.append(err_copy)
+    return JSONResponse(
+        status_code=422,
+        content={"detail": clean_errors}
+    )
 
 # CORS Configuration
 app.add_middleware(

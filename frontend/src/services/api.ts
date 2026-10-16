@@ -28,7 +28,15 @@ async function request<T>(endpoint: string, options?: RequestInit): Promise<T> {
     try {
       const errJson = await response.json();
       if (errJson.detail) {
-        errorMsg = typeof errJson.detail === 'string' ? errJson.detail : JSON.stringify(errJson.detail);
+        if (typeof errJson.detail === 'string') {
+          errorMsg = errJson.detail;
+        } else if (Array.isArray(errJson.detail)) {
+          errorMsg = errJson.detail.map((d: any) => d.msg || d.detail || JSON.stringify(d)).join('; ');
+        } else {
+          errorMsg = JSON.stringify(errJson.detail);
+        }
+      } else if (errJson.message) {
+        errorMsg = errJson.message;
       }
     } catch (_) {}
     throw new Error(errorMsg);
@@ -149,10 +157,10 @@ export const api = {
     body: JSON.stringify(payload),
   }),
 
-  reinspect: (id: string, payload: { inspector: string; reinspection_notes?: string }) =>
+  reinspect: (id: string, payload: FormData | { inspector: string; reinspection_notes?: string }) =>
     request<ReinspectionDiff>(`/inspections/${id}/reinspect`, {
       method: 'POST',
-      body: JSON.stringify(payload),
+      body: payload instanceof FormData ? payload : JSON.stringify(payload),
     }),
 
   closeSession: (id: string) => request<{ message: string; status: string }>(`/inspections/${id}/close`, {

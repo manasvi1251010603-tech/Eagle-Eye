@@ -29,6 +29,7 @@ async def save_uploaded_file(upload_file: UploadFile, allowed_extensions: set) -
     """
     ext = validate_file_extension(upload_file.filename, allowed_extensions)
     unique_name = f"{uuid.uuid4().hex}{ext}"
+    os.makedirs(UPLOADS_DIR, exist_ok=True)
     dest_path = os.path.join(UPLOADS_DIR, unique_name)
 
     size = 0
@@ -42,5 +43,22 @@ async def save_uploaded_file(upload_file: UploadFile, allowed_extensions: set) -
                     detail=f"File exceeds maximum allowed size of {MAX_FILE_SIZE_BYTES // (1024 * 1024)} MB"
                 )
             f.write(chunk)
+
+    # For images, verify file is decodable
+    if ext in ALLOWED_IMAGE_EXTS:
+        try:
+            from PIL import Image
+            with Image.open(dest_path) as img:
+                img.verify()
+        except Exception as e:
+            if os.path.exists(dest_path):
+                try:
+                    os.remove(dest_path)
+                except OSError:
+                    pass
+            raise HTTPException(
+                status_code=400,
+                detail=f"Uploaded file '{upload_file.filename}' could not be decoded as a valid image: {str(e)}"
+            )
 
     return upload_file.filename, f"uploads/{unique_name}"

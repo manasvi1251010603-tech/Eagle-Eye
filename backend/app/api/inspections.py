@@ -3,7 +3,7 @@ import json
 import uuid
 import datetime
 from typing import List, Optional, Dict, Any
-from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form, Query
+from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form, Query, Request
 from fastapi.responses import FileResponse
 from sqlalchemy.orm import Session
 
@@ -14,7 +14,7 @@ from app.schemas.schemas import (
     InspectionCreate, InspectionSummary, InspectionDetail, FindingResponse,
     FindingReviewUpdate, RepairActionResponse, RepairActionCreate, RepairActionUpdate,
     AlignmentRequest, AlignmentResponse, ColumnMappingRequest, SchedulePreviewResponse,
-    ReinspectionRequest, ReinspectionDiffResponse, ReportResponse
+    ReinspectionRequest, ReinspectionDiffResponse, ReportResponse, AuditEventResponse
 )
 from app.services.file_validation import save_uploaded_file, ALLOWED_IMAGE_EXTS, ALLOWED_PDF_EXTS, ALLOWED_EXCEL_EXTS
 from app.services.ga_parser import parse_ga_pdf
@@ -86,7 +86,7 @@ def list_inspection_sessions(
 def get_inspection_detail(session_id: str, db: Session = Depends(get_db)):
     session = db.query(InspectionSession).filter(InspectionSession.id == session_id).first()
     if not session:
-        raise HTTPException(status_code=404, detail="Inspection session not found")
+        raise HTTPException(status_code=404, detail=f"Inspection session '{session_id}' not found")
 
     summary = _build_session_summary(session, db)
     findings = db.query(InspectionFinding).filter(InspectionFinding.session_id == session_id).all()
@@ -97,7 +97,7 @@ def get_inspection_detail(session_id: str, db: Session = Depends(get_db)):
         column_mapping=session.column_mapping,
         alignment_data=session.alignment_data,
         findings=[_build_finding_response(f) for f in findings],
-        audit_events=audits
+        audit_events=[_build_audit_response(a) for a in audits]
     )
 
 
@@ -628,18 +628,47 @@ def update_repair_action(
 
 
 @router.post("/{session_id}/reinspect", response_model=ReinspectionDiffResponse)
-def create_reinspection(
+async def create_reinspection(
     session_id: str,
-    payload: ReinspectionRequest,
+    request: Request,
     db: Session = Depends(get_db)
 ):
     """
     Creates a new versioned inspection session linked to parent_session_id.
     Executes inspection on the post-repair image and computes the diff.
+    Supports both multipart/form-data with reinspection_photo and JSON payload.
     """
     parent = db.query(InspectionSession).filter(InspectionSession.id == session_id).first()
     if not parent:
-        raise HTTPException(status_code=404, detail="Parent inspection session not found")
+        raise HTTPException(status_code=404, detail=f"Inspection session '{session_id}' not found")
+
+    content_type = request.headers.get("content-type", "")
+    inspector = "Lead QC Inspector"
+    reinspection_notes = None
+    uploaded_photo = None
+
+    if "multipart/form-data" in content_type:
+        form = await request.form()
+        inspector = str(form.get("inspector") or "Lead QC Inspector")
+        reinspection_notes = form.get("reinspection_notes")
+        photo_field = form.get("reinspection_photo")
+        if photo_field is not None and hasattr(photo_field, "filename") and getattr(photo_field, "filename", None):
+            uploaded_photo = photo_field
+    else:
+        try:
+            body = await request.json()
+            inspector = body.get("inspector", "Lead QC Inspector")
+            reinspection_notes = body.get("reinspection_notes")
+        except Exception:
+            pass
+
+    repaired_image_path = "data/demo/cabinet_sample_01_repaired.jpg"
+    is_live_upload = False
+
+    if uploaded_photo:
+        orig_name, rel_path = await save_uploaded_file(uploaded_photo, ALLOWED_IMAGE_EXTS)
+        repaired_image_path = rel_path
+        is_live_upload = True
 
     new_session_id = f"INS-{datetime.datetime.utcnow().strftime('%Y%m%d')}-R{uuid.uuid4().hex[:3].upper()}"
 
@@ -648,15 +677,15 @@ def create_reinspection(
         cabinet_id=parent.cabinet_id,
         work_order_id=parent.work_order_id,
         batch_id=parent.batch_id,
-        inspector=payload.inspector,
+        inspector=inspector,
         reference_revision=parent.reference_revision,
         status="PROCESSING",
         parent_session_id=parent.id,
-        cabinet_image_path="data/demo/cabinet_sample_01_repaired.jpg",
-        repaired_image_path="data/demo/cabinet_sample_01_repaired.jpg",
+        cabinet_image_path=repaired_image_path,
+        repaired_image_path=repaired_image_path,
         ga_filename=parent.ga_filename,
         schedule_filename=parent.schedule_filename,
-        processing_mode="DEMO"
+        processing_mode="LIVE" if is_live_upload else "DEMO"
     )
     db.add(new_session)
     db.commit()
@@ -704,10 +733,14 @@ def create_reinspection(
         id=f"AUD-{uuid.uuid4().hex[:8]}",
         session_id=new_session.id,
         event_type="REINSPECTION_RUN",
-        description=f"Reinspection session {new_session.id} linked to {parent.id}. Resolved: {len(diff_result['resolved_findings'])}, Persistent: {len(diff_result['persistent_findings'])}.",
-        actor=payload.inspector
+        description=f"Reinspection session {new_session.id} linked to {parent.id}. Photo: {uploaded_photo.filename if uploaded_photo else 'Default'}. Resolved: {len(diff_result['resolved_findings'])}, Persistent: {len(diff_result['persistent_findings'])}.",
+        actor=inspector
     ))
     db.commit()
+
+    parent_path = parent.cabinet_image_path or "data/demo/cabinet_sample_01.jpg"
+    parent_img = parent_path if parent_path.startswith("/") else f"/{parent_path}"
+    repaired_img = repaired_image_path if repaired_image_path.startswith("/") else f"/{repaired_image_path}"
 
     return ReinspectionDiffResponse(
         reinspection_session_id=new_session.id,
@@ -717,7 +750,9 @@ def create_reinspection(
         new_findings=[_build_finding_response(f) for f in diff_result["new_findings"]],
         review_needed_findings=[_build_finding_response(f) for f in diff_result["review_needed_findings"]],
         can_close_session=diff_result["can_close_session"],
-        closure_blockers=diff_result["closure_blockers"]
+        closure_blockers=diff_result["closure_blockers"],
+        repaired_image_path=repaired_img,
+        parent_image_path=parent_img
     )
 
 
@@ -899,4 +934,16 @@ def _build_finding_response(f: InspectionFinding) -> FindingResponse:
         repair_status=f.repair_status,
         repair_actions=repairs,
         created_at=f.created_at
+    )
+
+
+def _build_audit_response(a: AuditEvent) -> AuditEventResponse:
+    return AuditEventResponse(
+        id=a.id,
+        session_id=a.session_id,
+        finding_id=a.finding_id,
+        event_type=a.event_type,
+        description=a.description,
+        actor=a.actor,
+        created_at=a.created_at
     )

@@ -80,7 +80,7 @@ const AppLayout: React.FC = () => {
   const headerInfo = getPageHeader();
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden text-gray-100 font-sans relative">
+    <div className="flex h-screen w-screen overflow-hidden text-slate-800 font-sans relative">
       {/* Blurred Industrial Atmosphere Background */}
       <IndustrialBackground currentPath={location.pathname} />
 
@@ -94,7 +94,7 @@ const AppLayout: React.FC = () => {
           subtitle={headerInfo.subtitle}
         />
 
-        <main className="flex-1 overflow-y-auto">
+        <main className="flex-1 overflow-y-auto animate-fade-in" key={location.pathname}>
           <Routes>
             <Route path="/" element={<DashboardPage />} />
             <Route path="/new-inspection" element={<NewInspectionPage />} />

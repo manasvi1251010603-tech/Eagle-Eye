@@ -78,20 +78,22 @@ export const ProcessingPage: React.FC = () => {
   const progressPercent = Math.min(Math.round((currentStageIdx / 10) * 100), 100);
 
   return (
-    <div className="p-6 max-w-5xl mx-auto space-y-6">
+    <div className="p-6 max-w-5xl mx-auto space-y-6 animate-fade-in">
       {/* Top Banner */}
-      <div className="p-5 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="p-5 rounded-xl bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4 animate-card-rise">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-accent-blue/10 text-accent-cyan border border-accent-blue/30 font-bold uppercase">
-              Step 3 of 3: AI Inspection Pipeline
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200 font-bold uppercase">
+              AI Inspection Processing Pipeline
             </span>
-            <span className="text-xs font-mono text-gray-400">Cabinet: {currentCabinetId} ({currentSessionId})</span>
+            <span className="text-xs font-mono text-slate-500">
+              Cabinet: <strong className="text-slate-800">{currentCabinetId}</strong> ({currentSessionId})
+            </span>
           </div>
-          <h2 className="text-xl font-bold text-white tracking-wide">
+          <h2 className="text-xl font-bold text-slate-900 tracking-tight">
             Automated Quality Inspection Pipeline
           </h2>
-          <p className="text-xs text-gray-400 mt-0.5">
+          <p className="text-xs text-slate-500 mt-0.5">
             Running 10-stage computer vision comparison against engineering CAD references.
           </p>
         </div>
@@ -101,14 +103,14 @@ export const ProcessingPage: React.FC = () => {
           {isCompleted ? (
             <button
               onClick={() => navigate('/results')}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-accent-blue text-white font-semibold text-xs transition-transform hover:scale-[1.02] shadow-blue-glow hover:bg-accent-blue-dark"
+              className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#0F2B5C] hover:bg-[#163A75] text-white font-semibold text-xs btn-lift shadow-sm transition-all"
             >
               <span>View QC Findings & Evidence</span>
               <ArrowRight className="w-4 h-4 text-white" />
             </button>
           ) : (
-            <div className="flex items-center gap-2 text-xs font-mono text-accent-cyan px-3 py-1.5 rounded bg-graphite/80 backdrop-blur-sm border border-slate-border">
-              <span className="w-2 h-2 rounded-full bg-accent-blue animate-ping" />
+            <div className="flex items-center gap-2 text-xs font-mono text-blue-700 px-3 py-1.5 rounded-lg bg-blue-50 border border-blue-200 shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-blue-600 animate-ping" />
               <span>Analyzing Physical Imagery...</span>
             </div>
           )}
@@ -116,14 +118,14 @@ export const ProcessingPage: React.FC = () => {
       </div>
 
       {/* Progress Bar */}
-      <div className="p-5 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical space-y-3">
+      <div className="p-5 rounded-xl bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-sm space-y-3 animate-card-rise">
         <div className="flex items-center justify-between text-xs font-mono">
-          <span className="text-gray-300">Overall Pipeline Progress</span>
-          <span className="text-accent-cyan font-bold">{progressPercent}%</span>
+          <span className="text-slate-700 font-semibold">Overall Pipeline Progress</span>
+          <span className="text-blue-700 font-bold">{progressPercent}%</span>
         </div>
-        <div className="w-full h-2.5 bg-graphite rounded-full overflow-hidden border border-slate-border">
+        <div className="w-full h-3 bg-slate-100 rounded-full overflow-hidden border border-slate-200">
           <div
-            className="h-full bg-gradient-to-r from-blue-600 to-cyan-400 transition-all duration-300"
+            className="h-full bg-gradient-to-r from-blue-600 to-indigo-600 transition-all duration-300"
             style={{ width: `${progressPercent}%` }}
           />
         </div>
@@ -132,9 +134,9 @@ export const ProcessingPage: React.FC = () => {
       {/* Stages Grid & Console Output */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Stages Checklist */}
-        <div className="p-5 rounded-xl bg-surface/85 backdrop-blur-md border border-slate-border/80 shadow-technical space-y-3">
-          <h3 className="text-xs font-mono uppercase tracking-wider text-gray-400 flex items-center gap-2">
-            <Layers className="w-4 h-4 text-accent-blue" />
+        <div className="p-5 rounded-xl bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-sm space-y-3 animate-card-rise">
+          <h3 className="text-xs font-mono uppercase tracking-wider text-slate-500 font-bold flex items-center gap-2 border-b border-slate-100 pb-2">
+            <Layers className="w-4 h-4 text-blue-600" />
             Active Verification Pipeline Stages
           </h3>
 
@@ -148,29 +150,29 @@ export const ProcessingPage: React.FC = () => {
                   key={st.id}
                   className={`p-2.5 rounded-lg border text-xs font-mono transition-all flex items-start gap-2.5 ${
                     isCurrent
-                      ? 'bg-surface-elevated border-accent-blue/50 text-white shadow-technical'
+                      ? 'bg-blue-50 border-blue-400 text-slate-900 shadow-sm'
                       : isPast
-                      ? 'bg-graphite/40 border-slate-border text-gray-300'
-                      : 'bg-graphite/10 border-slate-border/50 text-gray-600'
+                      ? 'bg-slate-50/80 border-slate-200 text-slate-800'
+                      : 'bg-slate-50/30 border-slate-100 text-slate-400'
                   }`}
                 >
                   <div className="mt-0.5 shrink-0">
                     {isPast ? (
-                      <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                     ) : (
-                      <Clock className="w-4 h-4 text-gray-600" />
+                      <Clock className="w-4 h-4 text-slate-400" />
                     )}
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between">
-                      <span className="font-semibold truncate">{st.name}</span>
-                      <span className={`text-[10px] px-1.5 py-0.2 rounded border ${
-                        st.status === 'SIMULATED' ? 'bg-amber-950/30 text-amber-400 border-amber-500/30' : 'bg-surface text-gray-400 border-slate-border'
+                      <span className="font-bold truncate">{st.name}</span>
+                      <span className={`text-[10px] px-1.5 py-0.5 rounded border font-semibold ${
+                        st.status === 'SIMULATED' ? 'bg-amber-50 text-amber-900 border-amber-300' : 'bg-white text-slate-600 border-slate-200'
                       }`}>
                         {st.module}
                       </span>
                     </div>
-                    <p className="text-[11px] text-gray-400 mt-0.5 truncate">{st.detail}</p>
+                    <p className="text-[11px] text-slate-500 mt-0.5 truncate">{st.detail}</p>
                   </div>
                 </div>
               );
@@ -179,22 +181,22 @@ export const ProcessingPage: React.FC = () => {
         </div>
 
         {/* Live Terminal Output */}
-        <div className="p-5 rounded-xl bg-graphite/85 backdrop-blur-md border border-slate-border/80 shadow-technical flex flex-col justify-between space-y-3 font-mono">
-          <div className="flex items-center justify-between border-b border-slate-border pb-2.5">
-            <span className="text-xs text-gray-400 flex items-center gap-2">
-              <Terminal className="w-3.5 h-3.5 text-accent-cyan" />
+        <div className="p-5 rounded-xl bg-[#0B1528] backdrop-blur-md border border-slate-800 shadow-md flex flex-col justify-between space-y-3 font-mono animate-card-rise">
+          <div className="flex items-center justify-between border-b border-slate-800 pb-2.5">
+            <span className="text-xs text-slate-300 font-semibold flex items-center gap-2">
+              <Terminal className="w-3.5 h-3.5 text-blue-400" />
               Engine Event Stream
             </span>
-            <span className="text-[10px] text-emerald-400 flex items-center gap-1">
+            <span className="text-[10px] text-emerald-400 flex items-center gap-1 font-semibold">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
               Online
             </span>
           </div>
 
-          <div className="flex-1 overflow-y-auto space-y-1.5 text-[11px] text-gray-300 max-h-[380px] pr-1">
+          <div className="flex-1 overflow-y-auto space-y-1.5 text-[11px] text-slate-300 max-h-[380px] pr-1">
             {logs.map((log, i) => (
               <div key={i} className="leading-relaxed">
-                <span className="text-accent-cyan font-bold">&gt;</span> {log}
+                <span className="text-blue-400 font-bold">&gt;</span> {log}
               </div>
             ))}
           </div>

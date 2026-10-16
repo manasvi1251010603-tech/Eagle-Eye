@@ -103,6 +103,20 @@ class FindingReviewUpdate(BaseModel):
     reviewer_notes: str
 
 
+# --- Audit Event Schemas ---
+
+class AuditEventResponse(BaseModel):
+    id: str
+    session_id: str
+    finding_id: Optional[str] = None
+    event_type: str
+    description: str
+    actor: str
+    created_at: datetime.datetime
+
+    model_config = ConfigDict(from_attributes=True)
+
+
 # --- Detailed Inspection Session Detail ---
 
 class InspectionDetail(InspectionSummary):
@@ -110,7 +124,7 @@ class InspectionDetail(InspectionSummary):
     alignment_data: Optional[str] = None
     extracted_references: Optional[str] = None
     findings: List[FindingResponse] = []
-    audit_events: List[Any] = []
+    audit_events: List[AuditEventResponse] = []
 
 
 class ExtractedReferencesUpdate(BaseModel):
@@ -186,20 +200,10 @@ class ReinspectionDiffResponse(BaseModel):
     review_needed_findings: List[FindingResponse] = []
     can_close_session: bool
     closure_blockers: List[str] = []
+    repaired_image_path: Optional[str] = None
+    parent_image_path: Optional[str] = None
 
 
-# --- Audit Event Schemas ---
-
-class AuditEventResponse(BaseModel):
-    id: str
-    session_id: str
-    finding_id: Optional[str] = None
-    event_type: str
-    description: str
-    actor: str
-    created_at: datetime.datetime
-
-    model_config = ConfigDict(from_attributes=True)
 
 
 # --- Report Schemas ---

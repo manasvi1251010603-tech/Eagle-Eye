@@ -38,28 +38,28 @@ export const IndustrialBackground: React.FC<IndustrialBackgroundProps> = ({ curr
 
   return (
     <div
-      className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-[#0A0F18]"
+      className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-[#EAF1F8]"
       aria-hidden="true"
     >
-      {/* 1. Blurred Industrial Photograph Layer (Edge bleed prevented by -inset-8 + scale(1.08)) */}
+      {/* 1. Blurred Industrial Photograph Layer (Reduced blur to 8.5px, scale(1.06) prevents edge clipping) */}
       <div
         key={selectedImage}
         className="absolute -inset-8 bg-cover bg-center transition-all duration-700 ease-in-out"
         style={{
           backgroundImage: `url(${selectedImage})`,
-          filter: 'blur(11px)',
-          transform: 'scale(1.08)',
+          filter: 'blur(8.5px)',
+          transform: 'scale(1.06)',
         }}
       />
 
-      {/* 2. Deep Navy Atmospheric Translucent Overlay (Balanced for photo visibility & UI contrast) */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#080D16]/55 via-[#0A0F18]/65 to-[#0A0F18]/78" />
+      {/* 2. Light Blue & Slate Translucent Atmosphere Overlay (Crisp contrast for white cards) */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#EEF4FA]/82 via-[#E4EEF8]/86 to-[#D8E6F5]/90" />
 
-      {/* 3. Subtle Vignette Depth */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_transparent_35%,_#0A0F18_92%)] opacity-35" />
+      {/* 3. Subtle Technical Vignette Depth */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_45%,_rgba(11,21,40,0.08)_100%)] pointer-events-none" />
 
       {/* 4. Subtle Industrial Blueprint Technical Grid */}
-      <div className="absolute inset-0 bg-tech-grid opacity-20" />
+      <div className="absolute inset-0 bg-tech-grid opacity-35 pointer-events-none" />
     </div>
   );
 };

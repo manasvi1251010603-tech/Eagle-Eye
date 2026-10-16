@@ -159,6 +159,8 @@ export interface ReinspectionDiff {
   review_needed_findings: InspectionFinding[];
   can_close_session: boolean;
   closure_blockers: string[];
+  repaired_image_path?: string;
+  parent_image_path?: string;
 }
 
 export interface ReportItem {

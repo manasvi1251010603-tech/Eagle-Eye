@@ -118,6 +118,60 @@ def test_create_and_run_inspection_lifecycle(client):
     assert excel_resp.json()["report_type"] == "EXCEL"
 
 
+def test_multipart_reinspection_upload(client):
+    # 1. Create a parent session
+    payload = {
+        "cabinet_id": "CAB-REINSPECT-TEST",
+        "inspector": "Reinspection Test Inspector",
+        "processing_mode": "DEMO"
+    }
+    create_resp = client.post("/api/inspections", json=payload)
+    assert create_resp.status_code == 200
+    parent_id = create_resp.json()["id"]
+
+    # 2. Run initial pipeline so defects exist
+    client.post(f"/api/inspections/{parent_id}/run-pipeline")
+
+    # 3. Post multipart reinspection with a mock image
+    dummy_image_bytes = b"\xff\xd8\xff\xe0\x00\x10JFIF\x00\x01\x01\x00\x00\x01\x00\x01\x00\x00\xff\xdb\x00C\x00\x08\x06\x06\x07\x06\x05\x08\x07\x07\x07\t\t\x08\n\x0c\x14\r\x0c\x0b\x0b\x0c\x19\x12\x13\x0f\x14\x1d\x1a\x1f\x1e\x1d\x1a\x1c\x1c $.' \",#\x1c\x1c(7),01444\x1f'9=82<.342\xff\xc0\x00\x0b\x08\x00\x01\x00\x01\x01\x01\x11\x00\xff\xda\x00\x08\x01\x01\x00\x00?\x00\xbf\x00\xff\xd9"
+    files = {
+        "reinspection_photo": ("cabinet_repaired_test.jpg", dummy_image_bytes, "image/jpeg")
+    }
+    data = {
+        "inspector": "Quality Audit Lead",
+        "reinspection_notes": "Rework verified with fresh photograph upload."
+    }
+    reinspect_resp = client.post(
+        f"/api/inspections/{parent_id}/reinspect",
+        data=data,
+        files=files
+    )
+    assert reinspect_resp.status_code == 200
+    res = reinspect_resp.json()
+    assert res["parent_session_id"] == parent_id
+    assert res["reinspection_session_id"].startswith("INS-")
+    assert "repaired_image_path" in res
+    assert len(res["resolved_findings"]) >= 1
+
+    # 4. Verify detail endpoint serializes cleanly with audit events (no PydanticSerializationError)
+    detail_resp = client.get(f"/api/inspections/{res['reinspection_session_id']}")
+    assert detail_resp.status_code == 200
+    detail_data = detail_resp.json()
+    assert len(detail_data["audit_events"]) >= 1
+
+    # 5. Missing parent session returns 404
+    missing_resp = client.post("/api/inspections/NON_EXISTENT_ID/reinspect", data={"inspector": "Tester"})
+    assert missing_resp.status_code == 404
+
+    # 6. Corrupt image file returns 400
+    corrupt_resp = client.post(
+        f"/api/inspections/{parent_id}/reinspect",
+        data={"inspector": "Tester"},
+        files={"reinspection_photo": ("bad_image.jpg", b"NOT_VALID_IMAGE_DATA_12345", "image/jpeg")}
+    )
+    assert corrupt_resp.status_code == 400
+
+
 def test_analytics_endpoint(client):
     response = client.get("/api/analytics/defects")
     assert response.status_code == 200

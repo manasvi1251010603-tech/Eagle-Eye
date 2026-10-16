@@ -30,23 +30,23 @@ export const Sidebar: React.FC = () => {
   ];
 
   return (
-    <aside className="w-64 bg-graphite/85 backdrop-blur-md border-r border-slate-border/80 flex flex-col justify-between shrink-0 h-screen sticky top-0 select-none z-20">
+    <aside className="w-64 bg-[#0B1528] border-r border-slate-800/90 flex flex-col justify-between shrink-0 h-screen sticky top-0 select-none z-20 shadow-md">
       {/* Top Brand Header */}
       <div>
-        <div className="p-5 border-b border-slate-border/80">
+        <div className="p-5 border-b border-slate-800/80">
           <Wordmark size="md" />
         </div>
 
         {/* Active Inspection Session Callout */}
-        <div className="mx-3.5 my-3 p-2.5 rounded-lg bg-surface/80 border border-slate-border/80 backdrop-blur-sm">
-          <div className="flex items-center justify-between text-[11px] font-mono text-gray-400 mb-1">
+        <div className="mx-3.5 my-3 p-2.5 rounded-lg bg-[#111F36] border border-blue-900/40 backdrop-blur-sm transition-all duration-200">
+          <div className="flex items-center justify-between text-[11px] font-mono text-slate-400 mb-1">
             <span className="flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-accent-blue animate-pulse" />
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
               ACTIVE SESSION
             </span>
-            <span className="text-accent-cyan font-bold">{currentCabinetId}</span>
+            <span className="text-blue-300 font-bold">{currentCabinetId}</span>
           </div>
-          <div className="text-xs font-mono text-gray-200 truncate" title={currentSessionId}>
+          <div className="text-xs font-mono text-slate-200 truncate" title={currentSessionId}>
             {currentSessionId}
           </div>
         </div>
@@ -63,14 +63,14 @@ export const Sidebar: React.FC = () => {
               <NavLink
                 key={item.to}
                 to={item.to}
-                className={`flex items-center justify-between px-3 py-2 rounded-md text-xs font-medium transition-all ${
+                className={`flex items-center justify-between px-3 py-2 rounded-md text-xs font-medium transition-all duration-200 ${
                   isActive
-                    ? 'bg-surface-elevated text-accent-blue border border-accent-blue/40 shadow-technical'
-                    : 'text-gray-300 hover:bg-surface hover:text-white border border-transparent'
+                    ? 'bg-blue-600 text-white shadow-sm border border-blue-500 font-semibold'
+                    : 'text-slate-300 hover:bg-[#15243E] hover:text-white border border-transparent'
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <Icon className={`w-4 h-4 ${isActive ? 'text-accent-blue' : 'text-gray-400'}`} />
+                  <Icon className={`w-4 h-4 transition-colors duration-150 ${isActive ? 'text-white' : 'text-slate-400'}`} />
                   <span>{item.label}</span>
                 </div>
                 {item.highlight && !isActive && (
@@ -83,13 +83,13 @@ export const Sidebar: React.FC = () => {
       </div>
 
       {/* System Health Status */}
-      <div className="p-3.5 border-t border-slate-border">
-        <div className="flex items-center justify-between text-[11px] font-mono text-gray-400 px-1">
+      <div className="p-3.5 border-t border-slate-800/80">
+        <div className="flex items-center justify-between text-[11px] font-mono text-slate-400 px-1">
           <span className="flex items-center gap-1.5">
             <span className="w-2 h-2 rounded-full bg-emerald-400" />
             Core API Online
           </span>
-          <span className="text-gray-500">Port 8000</span>
+          <span className="text-slate-500">Port 8000</span>
         </div>
       </div>
     </aside>

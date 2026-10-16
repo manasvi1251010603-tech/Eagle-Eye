@@ -4,8 +4,8 @@
 
 @layer base {
   body {
-    background-color: #0A0F18;
-    color: #F8FAFC;
+    background-color: #F1F5F9;
+    color: #0F172A;
     overflow-x: hidden;
   }
 }
@@ -16,22 +16,74 @@
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0F172A;
+  background: #E2E8F0;
 }
 ::-webkit-scrollbar-thumb {
-  background: #243447;
+  background: #94A3B8;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #3B82F6;
+  background: #2563EB;
 }
 
 /* Technical grid background pattern */
 .bg-tech-grid {
   background-size: 32px 32px;
   background-image: 
-    linear-gradient(to right, rgba(59, 130, 246, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(59, 130, 246, 0.04) 1px, transparent 1px);
+    linear-gradient(to right, rgba(15, 43, 92, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 43, 92, 0.05) 1px, transparent 1px);
+}
+
+/* Subtle purposeful transitions and animations (150-280ms) */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cardRise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 220ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-card-rise {
+  animation: cardRise 260ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Button interactive hover elevation */
+.btn-lift {
+  transition: all 180ms ease-in-out;
+}
+.btn-lift:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(15, 30, 54, 0.12);
+}
+.btn-lift:active {
+  transform: translateY(0);
+}
+
+/* Interactive upload dropzone transition */
+.dropzone-trans {
+  transition: all 200ms ease-in-out;
+}
+.dropzone-trans:hover {
+  border-color: #2563EB;
+  background-color: rgba(239, 246, 255, 0.9);
 }
 
 /* Subtle scanning line animation for AI analysis */
@@ -54,17 +106,18 @@
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg, transparent 0%, #3B82F6 50%, transparent 100%);
-  box-shadow: 0 0 12px #38BDF8;
+  background: linear-gradient(90deg, transparent 0%, #2563EB 50%, transparent 100%);
+  box-shadow: 0 0 10px #38BDF8;
   animation: radar-scan 2.4s linear infinite;
 }
 
 /* Pulse badge animation */
 @keyframes pulse-subtle {
   0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.8; transform: scale(0.98); }
+  50% { opacity: 0.85; transform: scale(0.98); }
 }
 
 .animate-pulse-subtle {
   animation: pulse-subtle 2s infinite ease-in-out;
 }
+
