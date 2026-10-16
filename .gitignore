@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+backend/venv/
+venv/
+.env
+.env.local
+
+# Python cache & testing
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
+
+# Local Storage (Keep directory structures, ignore generated files)
+uploads/*
+!uploads/.gitkeep
+reports/*
+!reports/.gitkeep
+
+# SQLite database
+*.sqlite3
+*.sqlite3-journal
+*.db
+
+# macOS specific
+.DS_Store
+.AppleDouble
+.LSOverride
