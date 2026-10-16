@@ -23,7 +23,7 @@ def seed_database(db: Session):
         cabinet_id="CAB-4092",
         work_order_id="WO-8492",
         batch_id="BATCH-2026-Q4",
-        inspector="Samarth Shingare (Lead QC)",
+        inspector="Lead QC Inspector",
         reference_revision="Rev C",
         status="REPAIR_REQUIRED",
         processing_mode="DEMO",
@@ -104,8 +104,8 @@ def seed_database(db: Session):
 
     # Audit events for session 1
     events = [
-        ("SESSION_CREATED", "Inspection session created for Cabinet CAB-4092.", "Samarth Shingare"),
-        ("FILES_UPLOADED", "Uploaded cabinet_sample_01.jpg, GA_Drawing_Cabinet_RevC.pdf, Wiring_Schedule_RevC.xlsx.", "Samarth Shingare"),
+        ("SESSION_CREATED", "Inspection session created for Cabinet CAB-4092.", "Lead QC Inspector"),
+        ("FILES_UPLOADED", "Uploaded cabinet_sample_01.jpg, GA_Drawing_Cabinet_RevC.pdf, Wiring_Schedule_RevC.xlsx.", "Lead QC Inspector"),
         ("ALIGNMENT_CONFIRMED", "Automatic homography perspective correction applied (tilt angle 3.2 deg).", "OpenCV Engine"),
         ("INSPECTION_RUN", "Inspection completed with 18 items checked: 15 PASS, 2 FAIL, 2 REVIEW.", "EAGLE EYE Rules Engine")
     ]
@@ -143,7 +143,7 @@ def seed_database(db: Session):
         cabinet_id="CAB-4075",
         work_order_id="WO-8455",
         batch_id="BATCH-2026-Q3",
-        inspector="Samarth Shingare (Lead QC)",
+        inspector="Lead QC Inspector",
         reference_revision="Rev A",
         status="CLOSED",
         processing_mode="DEMO",

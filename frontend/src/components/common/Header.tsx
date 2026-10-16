@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { PlusCircle, User, Cpu, ChevronDown } from 'lucide-react';
+import { PlusCircle, User, ChevronDown } from 'lucide-react';
 import { useInspectionSession } from '../../context/InspectionContext';
 
 interface HeaderProps {
@@ -50,17 +50,10 @@ export const Header: React.FC<HeaderProps> = ({ title, subtitle }) => {
           </div>
         )}
 
-        {/* Engine Mode Pill */}
-        <div className="hidden sm:flex items-center gap-2 px-2.5 py-1 rounded bg-surface border border-slate-border text-xs font-mono">
-          <span className="w-2 h-2 rounded-full bg-accent-blue animate-pulse" />
-          <span className="text-gray-400">ENGINE:</span>
-          <span className="text-accent-blue font-bold">DEMO MODE</span>
-        </div>
-
         {/* Inspector Profile */}
         <div className="hidden md:flex items-center gap-2 px-3 py-1 rounded bg-surface border border-slate-border text-xs text-gray-300">
           <User className="w-3.5 h-3.5 text-gray-400" />
-          <span className="font-mono text-gray-200">Samarth Shingare (Lead QC)</span>
+          <span className="font-mono text-gray-200">Lead QC Inspector</span>
         </div>
 
         {/* New Inspection CTA */}

@@ -181,7 +181,7 @@ export const ReportsAnalyticsPage: React.FC = () => {
               <span className="text-[10px] font-mono text-gray-400 uppercase tracking-wider block">Compliance Sign-Off</span>
               <div className="text-sm font-bold text-white">Lead QC Inspector</div>
               <div className="text-xs text-gray-400 space-y-1">
-                <div>Inspector: <span className="text-gray-200">Samarth Shingare</span></div>
+                <div>Inspector: <span className="text-gray-200">Lead QC Inspector</span></div>
                 <div>Digital Signature: <span className="font-mono text-emerald-400">SHA256:VERIFIED</span></div>
                 <div>Traceability: <span className="text-gray-200">Full Audit Log</span></div>
               </div>

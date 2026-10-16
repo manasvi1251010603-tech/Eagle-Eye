@@ -22,7 +22,7 @@ import { InspectionDisclaimer } from '../components/common/InspectionDisclaimer'
 export const ReinspectionPage: React.FC = () => {
   const navigate = useNavigate();
   const { currentSessionId, currentCabinetId } = useInspectionSession();
-  const [inspector, setInspector] = useState('Samarth Shingare (Lead QC)');
+  const [inspector, setInspector] = useState('Lead QC Inspector');
   const [notes, setNotes] = useState('Post-rework verification: Contactor K1 aligned, ferrule sleeve X1:14 corrected.');
   const [loading, setLoading] = useState(false);
   const [closing, setClosing] = useState(false);

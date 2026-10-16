@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'r
 import { InspectionProvider, useInspectionSession } from './context/InspectionContext';
 import { Sidebar } from './components/common/Sidebar';
 import { Header } from './components/common/Header';
+import { IndustrialBackground } from './components/common/IndustrialBackground';
 
 import { DashboardPage } from './pages/DashboardPage';
 import { NewInspectionPage } from './pages/NewInspectionPage';
@@ -79,18 +80,21 @@ const AppLayout: React.FC = () => {
   const headerInfo = getPageHeader();
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-charcoal text-gray-100 font-sans">
+    <div className="flex h-screen w-screen overflow-hidden bg-charcoal text-gray-100 font-sans relative">
+      {/* Blurred Industrial Atmosphere Background */}
+      <IndustrialBackground currentPath={location.pathname} />
+
       {/* Persistent Left Sidebar with exactly 8 items */}
       <Sidebar />
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col min-w-0 h-screen overflow-hidden">
+      <div className="flex-1 flex flex-col min-w-0 h-screen overflow-hidden relative z-10">
         <Header
           title={headerInfo.title}
           subtitle={headerInfo.subtitle}
         />
 
-        <main className="flex-1 overflow-y-auto bg-charcoal bg-tech-grid">
+        <main className="flex-1 overflow-y-auto">
           <Routes>
             <Route path="/" element={<DashboardPage />} />
             <Route path="/new-inspection" element={<NewInspectionPage />} />
